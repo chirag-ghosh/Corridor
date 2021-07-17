@@ -16,14 +16,17 @@
     background-color: #c4c4c4;
     border-radius: .5rem;
     font-family: 'Montserrat', sans-serif;
+    transition: all .3s;
 }
 
 .form-btn:hover {
     box-shadow: .1rem .1rem .4rem rgba(80, 80, 80, .5);
+    transform: translateY(-3px);
 }
 
 .form-btn:active {
     box-shadow: .1rem .1rem .4rem rgba(80, 80, 80, .2);
+    transform: translateY(0px);
 }
 
 .form-heading {

@@ -1,4 +1,4 @@
-import logo from './Assets/logo.svg';
+import corridorName from './Assets/corridorName.png';
 import loginBanner from './Assets/loginBanner.png'
 import './App.css';
 import { Component } from 'react';
@@ -8,7 +8,7 @@ import Signin from './Forms/Signin';
 class App extends Component {
 
   state = {
-    displayMode : 0 // 0 - SignUp, 1 - SignIn, 2 - Dashboard 
+    displayMode : 2 // 0 - SignUp, 1 - SignIn, 2 - Dashboard 
   }
 
   changeForm = () => {
@@ -22,6 +22,15 @@ class App extends Component {
 
   formSubmit = (event) => {
     event.preventDefault();
+    this.setState({
+      displayMode : 2
+    });
+  }
+
+  signOut = () => {
+    this.setState({
+      displayMode : 0
+    });
   }
 
 
@@ -29,6 +38,7 @@ class App extends Component {
 
     var loginPageDiv = null;
     var loginForm = null;
+    var dashboardPageDiv = null;
 
     if(this.state.displayMode === 0) {
       loginForm = (
@@ -41,24 +51,40 @@ class App extends Component {
       );
     }
 
-    loginPageDiv = (
-      <div className="loginPageDiv">
-        <div className="bannerArea">
-          <img src={logo} className="logo" alt="app logo"></img>
-          <div className="AppTitle">&nbsp;orridor</div>
-          <div className="loginBannerDiv">
-            <img src={loginBanner} className="loginBanner" alt="login banner"></img>
+    if(this.state.displayMode  !== 2) {
+      loginPageDiv = (
+        <div className="loginPageDiv">
+          <div className="bannerArea">
+            <img src={corridorName} className="corridorName" alt="corridorName"></img>
+            <div className="loginBannerDiv">
+              <img src={loginBanner} className="loginBanner" alt="login banner"></img>
+            </div>
+          </div>
+          <div className="formArea">
+            {loginForm}
           </div>
         </div>
-        <div className="formArea">
-          {loginForm}
-        </div>
-      </div>
-    );
+      );
+    }
+    else {
+      dashboardPageDiv = (
+          <div className="dashboardPageDiv">
+            <div className="header">
+              <img src={corridorName} className="corridorName" alt="corridorName"></img>
+              <button className="form-btn sign-out-btn" onClick={this.signOut}>Sign Out</button>
+            </div>
+            <div className="createPostDiv">
+              <input type="text" className="createPostInput" required></input>
+              <button className="createPostButton">Post</button>
+            </div>
+          </div>
+      );
+    }
 
     return (
       <div className="App">
         {loginPageDiv}
+        {dashboardPageDiv}
       </div>
     );
   }

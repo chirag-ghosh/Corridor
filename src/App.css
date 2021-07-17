@@ -18,17 +18,9 @@
   border-radius: 1rem 0 0 1rem;
 }
 
-.logo {
-  width: 4rem;
+.corridorName {
+  width: 15rem;
   margin: 2rem 0 0 2.5rem;
-}
-
-.AppTitle {
-  display: inline-block;
-  font-size: 2rem;
-  vertical-align: top;
-  padding: 2.2rem 0;
-  font-family: 'Pacifico', cursive;
 }
 
 .loginBannerDiv {
@@ -42,4 +34,48 @@
 
 .formArea {
   width: 50%;
+}
+
+.dashboardPageDiv {
+  width: 100%;
+  height: 100vh;
+  background-color: #f0efe9;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sign-out-btn {
+  margin: 1.8rem 2rem 0 0;
+  padding: 1rem 1.5rem !important;
+}
+
+.createPostDiv {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+  align-items: center;
+}
+
+.createPostInput {
+    width: 40%;
+    padding: 1rem 1rem;
+    border: 3.5px solid #c4c4c4;
+    border-radius: 10px 0 0 10px;
+}
+
+.createPostInput:focus {
+  outline: none;
+}
+
+.createPostButton {
+  border: none;
+  font-size: 1rem;
+  padding: 1.1rem 1.5rem;
+  background-color: #c4c4c4;
+  border-radius: 0 10px 10px 0;
+  font-family: 'Montserrat', sans-serif;
 }
