@@ -16,6 +16,7 @@
     background-color: #c4c4c4;
     border-radius: .5rem;
     font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
     transition: all .3s;
 }
 
@@ -72,4 +73,46 @@
 .form-submit-btn {
     font-size: 1.2rem;
     margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .form-btn {
+        font-size: 1rem;
+        padding: .5rem 1rem;
+    }
+
+    .form-heading {
+        padding: 1rem 1.5rem;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .form-subheading {
+        padding: 0;
+        text-align: center;
+    }
+
+    .login-form {
+        padding: 2rem 1rem;
+        margin: 1rem 1rem;
+        align-items: center;
+    }
+
+    .login-form-group {
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+
+    .input-field {
+        width: 90%;
+        margin: .5rem 1rem;
+        padding: .5rem .8rem;
+    }
+
+    .input-label {
+        padding: 0 1.2rem;
+        font-size: .8rem;
+        width: 100%;
+    }
 }

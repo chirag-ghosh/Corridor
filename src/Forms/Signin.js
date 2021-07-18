@@ -30,7 +30,7 @@ const Signin = (props) => {
                 </div>
                 <br/><br/>
                 <div className="login-form-group">
-                    <button onClick={props.submit} className="form-btn form-submit-btn">Sign Up</button>
+                    <button onClick={props.submit} className="form-btn form-submit-btn">Sign In</button>
                 </div>
             </form>
         </div>
