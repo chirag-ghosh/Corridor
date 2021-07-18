@@ -1,13 +1,25 @@
+.notificationDiv {
+  background-color: #373534;
+  color: #eee;
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
 .loginPageBackground {
   width: 100vw;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   background-color: #c4c4c4;
-  padding-top: 10vh;
+  padding: 10vh;
 }
 
 .loginPageDiv {
   width: 80vw;
-  height: 80vh;
+  height: auto;
+  min-height: 80vh;
   margin: 0 auto;
   background-color: #f0efe9ca;
   position: relative;
@@ -18,7 +30,8 @@
 
 .bannerArea {
   width: 50%;
-  height: 80vh;
+  height: auto;
+  min-height: 80vh;
   background-color: #f0efe9;
   border-radius: 1rem 0 0 1rem;
 }
@@ -118,7 +131,7 @@
 
   .bannerArea {
     background-color: transparent;
-    height: auto;
+    min-height: 0;
   }
 
   .loginBannerDiv {
@@ -132,11 +145,17 @@
   .corridorName {
     width: 10rem;
     transform: translateY(-.2rem);
+    margin: 1.5rem 0 0 1rem;
   }
 
   .sign-out-btn {
+    margin: .8rem 1rem 0 0;
     font-size: .7rem;
     padding: .8rem 1rem !important;
+  }
+
+  .author-div {
+    transform: translateY(-.4rem);
   }
 
   .createPostInput {

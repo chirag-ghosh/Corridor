@@ -8,6 +8,9 @@ import Signin from './Forms/Signin';
 import Post from './Post/Post';
 import Lottie from 'react-lottie';
 import emptyAnimationData from './Assets/emptyLottie.json';
+import ReactNotification from 'react-notifications-component';
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css'
 
 class App extends Component {
 
@@ -28,6 +31,22 @@ class App extends Component {
     }
   };
 
+  showNotification = (message) => {
+    store.addNotification({
+      content: (
+        <div className="notificationDiv">{message}</div>
+      ),
+      type: "success",
+      insert: "bottom",
+      container: "bottom-left",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+        duration: 2000
+      }
+    });
+  }
+
   changeForm = () => {
     var tempDisplayMode = this.state.displayMode;
     if(tempDisplayMode === 0) tempDisplayMode = 1;
@@ -37,10 +56,12 @@ class App extends Component {
     });
   }
 
-  formSubmit = (event) => {
-    event.preventDefault();
+  formSubmit = (username) => {
+    this.showNotification("Successfully signed in as " + username);
     this.setState({
-      displayMode : 2
+      displayMode : 2,
+      currentUser : username,
+      tempPost : {text : "", author : username, authorPic : defaultProfile, likes : 0, currentUserLike: 0}
     });
   }
 
@@ -48,6 +69,7 @@ class App extends Component {
     this.setState({
       displayMode : 0
     });
+    this.showNotification("Signed out!");
   }
 
   inputChangeHandler = (event) => {
@@ -64,6 +86,12 @@ class App extends Component {
     if(this.state.tempPost.text.trim().length === 0) return;
     var tempPostsArr = [...this.state.posts];
     tempPostsArr.unshift(this.state.tempPost);
+    if(this.state.inputMode === "Post") {
+      this.showNotification("Post shared!");
+    }
+    else {
+      this.showNotification("Post edited!");
+    }
     this.setState({
         posts : tempPostsArr,
         inputMode : "Post",
@@ -72,7 +100,6 @@ class App extends Component {
   }
 
   editPost = (index) => {
-    console.log("Edit");
     if(this.state.posts[index].author === this.state.currentUser) {
       var tempPostsArr = [...this.state.posts];
       var postToEdit = tempPostsArr[index];
@@ -83,16 +110,22 @@ class App extends Component {
         inputMode : "Edit"
       });
     }
+    else {
+      this.showNotification("Post can only be edited by the creator.");
+    }
   }
 
   deletePost = (index) => {
-    console.log(this.state.posts[index]);
     if(this.state.posts[index].author === this.state.currentUser) {
       var tempPostsArr = [...this.state.posts];
       tempPostsArr.splice(index, 1);
       this.setState({
         posts : tempPostsArr
       });
+      this.showNotification("Post deleted!");
+    }
+    else {
+      this.showNotification("Post can only be deleted by the creator.");
     }
   }
 
@@ -163,12 +196,12 @@ class App extends Component {
 
     if(this.state.displayMode === 0) {
       loginForm = (
-        <Signup change={this.changeForm} submit={(event) => this.formSubmit(event)}></Signup>
+        <Signup notify={message => this.showNotification(message)} change={this.changeForm} submit={(username) => this.formSubmit(username)}></Signup>
       );
     }
     else {
       loginForm = (
-        <Signin change={this.changeForm} submit={(event) => this.formSubmit(event)}></Signin>
+        <Signin notify={message => this.showNotification(message)} change={this.changeForm} submit={(username) => this.formSubmit(username)}></Signin>
       );
     }
 
@@ -230,6 +263,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <ReactNotification/>
         {loginPageDiv}
         {dashboardPageDiv}
       </div>
