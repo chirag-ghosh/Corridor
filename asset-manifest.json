@@ -1,27 +1,27 @@
 {
   "files": {
     "main.css": "/Corridor/static/css/main.501b4243.chunk.css",
-    "main.js": "/Corridor/static/js/main.791353f6.chunk.js",
-    "main.js.map": "/Corridor/static/js/main.791353f6.chunk.js.map",
-    "runtime-main.js": "/Corridor/static/js/runtime-main.f26766e0.js",
-    "runtime-main.js.map": "/Corridor/static/js/runtime-main.f26766e0.js.map",
+    "main.js": "/Corridor/static/js/main.fb4a20d5.chunk.js",
+    "main.js.map": "/Corridor/static/js/main.fb4a20d5.chunk.js.map",
+    "runtime-main.js": "/Corridor/static/js/runtime-main.c68b8e96.js",
+    "runtime-main.js.map": "/Corridor/static/js/runtime-main.c68b8e96.js.map",
     "static/css/2.bd9a6a05.chunk.css": "/Corridor/static/css/2.bd9a6a05.chunk.css",
-    "static/js/2.0088a842.chunk.js": "/Corridor/static/js/2.0088a842.chunk.js",
-    "static/js/2.0088a842.chunk.js.map": "/Corridor/static/js/2.0088a842.chunk.js.map",
-    "static/js/3.bfa791d7.chunk.js": "/Corridor/static/js/3.bfa791d7.chunk.js",
-    "static/js/3.bfa791d7.chunk.js.map": "/Corridor/static/js/3.bfa791d7.chunk.js.map",
+    "static/js/2.f2c5ef4c.chunk.js": "/Corridor/static/js/2.f2c5ef4c.chunk.js",
+    "static/js/2.f2c5ef4c.chunk.js.map": "/Corridor/static/js/2.f2c5ef4c.chunk.js.map",
+    "static/js/3.ee821f95.chunk.js": "/Corridor/static/js/3.ee821f95.chunk.js",
+    "static/js/3.ee821f95.chunk.js.map": "/Corridor/static/js/3.ee821f95.chunk.js.map",
     "index.html": "/Corridor/index.html",
     "static/css/2.bd9a6a05.chunk.css.map": "/Corridor/static/css/2.bd9a6a05.chunk.css.map",
     "static/css/main.501b4243.chunk.css.map": "/Corridor/static/css/main.501b4243.chunk.css.map",
-    "static/js/2.0088a842.chunk.js.LICENSE.txt": "/Corridor/static/js/2.0088a842.chunk.js.LICENSE.txt",
+    "static/js/2.f2c5ef4c.chunk.js.LICENSE.txt": "/Corridor/static/js/2.f2c5ef4c.chunk.js.LICENSE.txt",
     "static/media/corridorName.536916af.png": "/Corridor/static/media/corridorName.536916af.png",
     "static/media/loginBanner.ad2fe875.png": "/Corridor/static/media/loginBanner.ad2fe875.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.f26766e0.js",
+    "static/js/runtime-main.c68b8e96.js",
     "static/css/2.bd9a6a05.chunk.css",
-    "static/js/2.0088a842.chunk.js",
+    "static/js/2.f2c5ef4c.chunk.js",
     "static/css/main.501b4243.chunk.css",
-    "static/js/main.791353f6.chunk.js"
+    "static/js/main.fb4a20d5.chunk.js"
   ]
 }
