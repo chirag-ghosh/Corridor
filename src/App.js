@@ -15,7 +15,9 @@ import axios from "axios";
 import {
   ALLPOSTS_URL,
   DELETEPOST_URL,
+  DISLIKEPOST_URL,
   EDITPOST_URL,
+  LIKEPOST_URL,
   POST_URL,
   USERDATA_URL,
 } from "./config/constants";
@@ -84,10 +86,10 @@ class App extends Component {
             dislikes: response.data[i].dislikes,
             currentUserLike: 0,
           };
-          if (response.data[i].likes.includes(this.state.currentUser)) {
+          if (response.data[i].likes.includes(this.state.currentUser.id)) {
             tokenPosts[i].currentUserLike = 1;
           }
-          if (response.data[i].dislikes.includes(this.state.currentUser)) {
+          if (response.data[i].dislikes.includes(this.state.currentUser.id)) {
             tokenPosts[i].currentUserLike = -1;
           }
         }
@@ -313,16 +315,69 @@ class App extends Component {
     var tempCurrentUserLike = this.state.posts[index].currentUserLike;
     var tempAllPosts = [...this.state.posts];
     var postToEdit = { ...this.state.posts[index] };
-    var add;
     if (tempCurrentUserLike === 1) {
-      add = -1;
       tempCurrentUserLike = 0;
+      //
+      axios
+        .post(
+          LIKEPOST_URL,
+          {
+            id: this.state.posts[index].id,
+            hasLiked: false,
+          },
+          {
+            headers: {
+              Authorization: this.state.token,
+            },
+          }
+        )
+        .then((response) => console.log(response))
+        .catch((err) => console.log(err));
+      //
+      postToEdit.likes = postToEdit.likes.filter((value, index, arr) => {
+        return value !== this.state.currentUser.id;
+      });
     } else {
-      add = 1 - tempCurrentUserLike;
       tempCurrentUserLike = 1;
+      //
+      axios
+        .post(
+          LIKEPOST_URL,
+          {
+            id: this.state.posts[index].id,
+            hasLiked: true,
+          },
+          {
+            headers: {
+              Authorization: this.state.token,
+            },
+          }
+        )
+        .then((response) => console.log(response))
+        .catch((err) => console.log(err));
+      //
+      axios
+        .post(
+          DISLIKEPOST_URL,
+          {
+            id: this.state.posts[index].id,
+            hasDisliked: false,
+          },
+          {
+            headers: {
+              Authorization: this.state.token,
+            },
+          }
+        )
+        .then((response) => console.log(response))
+        .catch((err) => console.log(err));
+      //
+      postToEdit.dislikes = postToEdit.dislikes.filter((value, index, arr) => {
+        return value !== this.state.currentUser.id;
+      });
+      postToEdit.likes.push(this.state.currentUser.id);
     }
     postToEdit.currentUserLike = tempCurrentUserLike;
-    postToEdit.likes += add;
     tempAllPosts[index] = postToEdit;
     this.setState({
       posts: tempAllPosts,
@@ -334,16 +389,69 @@ class App extends Component {
     var tempCurrentUserLike = this.state.posts[index].currentUserLike;
     var tempAllPosts = [...this.state.posts];
     var postToEdit = { ...this.state.posts[index] };
-    var add;
     if (tempCurrentUserLike === -1) {
-      add = 1;
       tempCurrentUserLike = 0;
+      //
+      axios
+        .post(
+          DISLIKEPOST_URL,
+          {
+            id: this.state.posts[index].id,
+            hasDisliked: false,
+          },
+          {
+            headers: {
+              Authorization: this.state.token,
+            },
+          }
+        )
+        .then((response) => console.log(response))
+        .catch((err) => console.log(err));
+      //
+      postToEdit.dislikes = postToEdit.dislikes.filter((value, index, arr) => {
+        return value !== this.state.currentUser.id;
+      });
     } else {
-      add = -1 - tempCurrentUserLike;
       tempCurrentUserLike = -1;
+      //
+      axios
+        .post(
+          LIKEPOST_URL,
+          {
+            id: this.state.posts[index].id,
+            hasLiked: false,
+          },
+          {
+            headers: {
+              Authorization: this.state.token,
+            },
+          }
+        )
+        .then((response) => console.log(response))
+        .catch((err) => console.log(err));
+      //
+      axios
+        .post(
+          DISLIKEPOST_URL,
+          {
+            id: this.state.posts[index].id,
+            hasDisliked: true,
+          },
+          {
+            headers: {
+              Authorization: this.state.token,
+            },
+          }
+        )
+        .then((response) => console.log(response))
+        .catch((err) => console.log(err));
+      //
+      postToEdit.likes = postToEdit.likes.filter((value, index, arr) => {
+        return value !== this.state.currentUser.id;
+      });
+      postToEdit.dislikes.push(this.state.currentUser.id);
     }
     postToEdit.currentUserLike = tempCurrentUserLike;
-    postToEdit.likes += add;
     tempAllPosts[index] = postToEdit;
     this.setState({
       posts: tempAllPosts,
@@ -466,7 +574,8 @@ class App extends Component {
                   text={post.text}
                   authorName={post.author}
                   authorPic={post.authorPic}
-                  likesCount={post.likes.length - post.dislikes.length}
+                  likesArr={post.likes}
+                  dislikesArr={post.dislikes}
                   edit={this.editPost.bind(this, index)}
                   delete={this.deletePost.bind(this, index)}
                   like={this.likePost.bind(this, index)}
